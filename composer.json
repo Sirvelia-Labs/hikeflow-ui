@@ -1,0 +1,42 @@
+{
+	"name": "joanrodas/plubo",
+	"type": "template",
+	"description": "A Simple and fast WP Plugin Boilerplate.",
+	"keywords": [
+		"plugin",
+		"wordpress",
+		"boilerplate",
+		"wp"
+	],
+	"homepage": "https://github.com/joanrodas/plubo",
+	"license": "GPL-3.0+",
+	"authors": [
+		{
+			"name": "Joan Rodas Cusidó",
+			"email": "joan@sirvelia.com",
+			"homepage": "https://sirvelia.com",
+			"role": "Developer"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"PluginPlaceholder\\": ""
+		},
+		"files": [
+			"Utils/dev.php"
+		]
+	},
+	"require": {
+		"php": ">=7.4",
+		"jenssegers/blade": "1.4.0"
+	},
+	"scripts": {
+		"post-create-project-cmd": [
+			"hash plubo-cli 2>/dev/null || { wget -qO- https://github.com/joanrodas/plubo-cli/releases/download/v0.1.3/plubo-cli_0.1.3_Linux_x86_64.tar.gz | tar -xvz }",
+			"chmod +x plubo-cli && ./plubo-cli namespace-project"
+		],
+		"zip": [
+			"PLUGIN_DIR=${PWD##*/} && cd .. && zip -r $PLUGIN_DIR/$PLUGIN_DIR.zip $PLUGIN_DIR -x $PLUGIN_DIR/plubo $PLUGIN_DIR/plubo.sh $PLUGIN_DIR/package.json $PLUGIN_DIR/package-lock.json $PLUGIN_DIR/composer.json $PLUGIN_DIR/composer.lock $PLUGIN_DIR/tailwind.config.js $PLUGIN_DIR/yarn.lock $PLUGIN_DIR/.git/\\* $PLUGIN_DIR/.gitignore $PLUGIN_DIR/.eslintrc.js $PLUGIN_DIR/.stylelintrc.js $PLUGIN_DIR/.editorconfig $PLUGIN_DIR/node_modules/\\*"
+		]
+	}
+}
