@@ -1,5 +1,5 @@
 <?php
-namespace PluginPlaceholder\Includes;
+namespace HikeflowUi\Includes;
 
 class Loader
 {
@@ -8,8 +8,8 @@ class Loader
 
 	public function __construct()
 	{
-		$this->plugin_version = defined('PLUGIN_PLACEHOLDER_VERSION') ? PLUGIN_PLACEHOLDER_VERSION : '1.0.0';
-		$this->plugin_name = 'plugin-placeholder';
+		$this->plugin_version = defined('HIKEFLOWUI_VERSION') ? HIKEFLOWUI_VERSION : '1.0.0';
+		$this->plugin_name = 'hikeflow-ui';
 		$this->load_dependencies();
 
 		add_action('plugins_loaded', [$this, 'load_plugin_textdomain']);
@@ -18,8 +18,8 @@ class Loader
 
 	private function load_dependencies()
 	{
-		foreach (glob(PLUGIN_PLACEHOLDER_PATH . 'Functionality/*.php') as $filename) {
-			$class_name = '\\PluginPlaceholder\Functionality\\'. basename($filename, '.php');
+		foreach (glob(HIKEFLOWUI_PATH . 'Functionality/*.php') as $filename) {
+			$class_name = '\\HikeflowUi\Functionality\\'. basename($filename, '.php');
 			if (class_exists($class_name)) {
 				try {
 					new $class_name($this->plugin_name, $this->plugin_version);
@@ -34,15 +34,15 @@ class Loader
 
 	public function load_plugin_textdomain()
 	{
-		load_plugin_textdomain('plugin-placeholder', false, PLUGIN_PLACEHOLDER_BASENAME . '/languages/');
+		load_plugin_textdomain('hikeflow-ui', false, HIKEFLOWUI_BASENAME . '/languages/');
 	}
 
 	public function load_assets()
 	{
-		wp_enqueue_style('plugin-placeholder/app.css', PLUGIN_PLACEHOLDER_URL . 'dist/app.css', false, null);
-		wp_enqueue_script('plugin-placeholder/app.js', PLUGIN_PLACEHOLDER_URL . 'dist/app.js', [], null, true);
+		wp_enqueue_style('hikeflow-ui/app.css', HIKEFLOWUI_URL . 'dist/app.css', false, null);
+		wp_enqueue_script('hikeflow-ui/app.js', HIKEFLOWUI_URL . 'dist/app.js', [], null, true);
 
-		wp_localize_script('plugin-placeholder/app.js', 'plugin_placeholder_ajax', [
+		wp_localize_script('hikeflow-ui/app.js', 'plugin_placeholder_ajax', [
 			'ajaxurl'   => admin_url('admin-ajax.php'),
 			'nonce'     => wp_create_nonce('ajax-nonce'),
 		]);

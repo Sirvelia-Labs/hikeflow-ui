@@ -1,6 +1,6 @@
 <?php
 
-namespace PluginPlaceholder\Includes;
+namespace HikeflowUi\Includes;
 
 class Deactivator
 {

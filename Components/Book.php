@@ -1,6 +1,6 @@
 <?php
 
-namespace PluginPlaceholder\Components;
+namespace HikeflowUi\Components;
 
 class Book {
     

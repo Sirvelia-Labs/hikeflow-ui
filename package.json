@@ -1,31 +1,7 @@
 {
-	"name": "@joanrodas/plubo",
-	"version": "1.0.0",
-	"author": "Joan Rodas <joan@sirvelia.com>",
-	"homepage": "https://plubo.dev",
-	"private": true,
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/joanrodas/plubo.git"
-	},
+	"author": "Joan Rodas \u003cjoan@sirvelia.com\u003e",
 	"bugs": {
 		"url": "https://github.com/joanrodas/plubo/issues"
-	},
-	"licenses": [
-		{
-			"type": "GPL-3.0+",
-			"url": "https://www.gnu.org/licenses/gpl-3.0"
-		}
-	],
-	"engines": {
-		"node": ">=16.0.0"
-	},
-	"scripts": {
-		"build": "wp-scripts build",
-		"start": "wp-scripts start",
-		"translate": "yarn translate:pot && yarn translate:update",
-		"translate:pot": "wp i18n make-pot . ./languages/plugin-placeholder.pot --ignore-domain --include=\"react,resources\"",
-		"translate:js": "wp i18n make-json ./languages --pretty-print"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "latest",
@@ -41,5 +17,29 @@
 		"webpack": "^5.75.0",
 		"webpack-cli": "^5.0.1",
 		"webpack-fix-style-only-entries": "0.6.1"
-	}
+	},
+	"engines": {
+		"node": "\u003e=16.0.0"
+	},
+	"homepage": "https://plubo.dev",
+	"licenses": [
+		{
+			"type": "GPL-3.0+",
+			"url": "https://www.gnu.org/licenses/gpl-3.0"
+		}
+	],
+	"name": "@sirvelia-labs/hikeflow-ui",
+	"private": true,
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/joanrodas/plubo.git"
+	},
+	"scripts": {
+		"build": "wp-scripts build",
+		"start": "wp-scripts start",
+		"translate": "yarn translate:pot \u0026\u0026 yarn translate:update",
+		"translate:js": "wp i18n make-json ./languages --pretty-print",
+		"translate:pot": "wp i18n make-pot . ./languages/plugin-placeholder.pot --ignore-domain --include=\"react,resources\""
+	},
+	"version": "1.0.0"
 }

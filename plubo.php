@@ -375,7 +375,7 @@ function plubo_create($option, $name)
     case 'functionality':
       $base_file = "<?php\n";
       ob_start(); ?>
-namespace PluginPlaceholder\Functionality;
+namespace HikeflowUi\Functionality;
 
 class <?= $filename ?> {
 
@@ -394,7 +394,7 @@ class <?= $filename ?> {
     case 'component':
 		$base_file = "<?php\n";
 		ob_start(); ?>
-namespace PluginPlaceholder\Components;
+namespace HikeflowUi\Components;
 
 class <?= $filename ?> {
     
@@ -408,7 +408,7 @@ class <?= $filename ?> {
     case 'utils':
             $base_file = "<?php\n";
             ob_start(); ?>
-namespace PluginPlaceholder\Utils;
+namespace HikeflowUi\Utils;
 <?php $base_file .= ob_get_clean();
       file_put_contents("./Utils/{$filename}.php", $base_file);
       break;

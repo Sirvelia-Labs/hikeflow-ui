@@ -1,6 +1,6 @@
 <?php
 
-namespace PluginPlaceholder\Includes;
+namespace HikeflowUi\Includes;
 
 use Jenssegers\Blade\Blade;
 
@@ -11,7 +11,7 @@ class BladeLoader
 
 	private function __construct()
 	{
-		$this->blade = new Blade(PLUGIN_PLACEHOLDER_PATH . 'resources/views', PLUGIN_PLACEHOLDER_PATH . 'resources/cache');
+		$this->blade = new Blade(HIKEFLOWUI_PATH . 'resources/views', HIKEFLOWUI_PATH . 'resources/cache');
 	}
 
 	// Clone not allowed
