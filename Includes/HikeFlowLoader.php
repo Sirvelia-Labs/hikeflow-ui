@@ -2,9 +2,9 @@
 
 namespace HikeflowUi\Includes;
 
-use Jenssegers\Blade\Blade;
+use SirveliaLabs\Blade\Blade;
 
-class BladeLoader
+class HikeFlowLoader
 {
 	private static $instance = NULL;
 	private $blade;
@@ -12,6 +12,8 @@ class BladeLoader
 	private function __construct()
 	{
 		$this->blade = new Blade(HIKEFLOWUI_PATH . 'resources/views', HIKEFLOWUI_PATH . 'resources/cache');
+
+
 	}
 
 	// Clone not allowed
@@ -22,18 +24,15 @@ class BladeLoader
 	public static function getInstance()
 	{
 		if (is_null(self::$instance)) {
-			self::$instance = new BladeLoader();
+			self::$instance = new HikeFlowLoader();
 		}
 		return self::$instance;
 	}
 
-	public function make_directive(string $name, callable $handler)
+	private function loadComponents()
 	{
-		$this->blade->directive($name, $handler);
-	}
-
-	public function template($name, $args = [])
-	{
-		return $this->blade->render($name, $args);
+		$this->blade->compiler()->components([
+			'alert'                     => 'test-alert',
+		]);
 	}
 }

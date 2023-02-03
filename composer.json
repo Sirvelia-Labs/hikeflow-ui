@@ -32,8 +32,13 @@
 	"keywords": ["css", "components", "tailwind", "blade", "alpine"],
 	"license": "GPL-3.0+",
 	"name": "sirvelia-labs/hikeflow-ui",
+	"repositories": [{
+		"type": "vcs",
+		"url": "https://github.com/Sirvelia-Labs/blade"
+	}],
 	"require": {
 		"jenssegers/blade": "1.4.0",
+		"sirvelia-labs/blade": "0.0.1",
 		"php": ">=7.4"
 	}
 }
