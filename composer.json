@@ -28,7 +28,7 @@
 		}
 	},
 	"description": "Blade components",
-	"homepage": "https://sirvelia.com,
+	"homepage": "https://sirvelia.com",
 	"keywords": ["css", "components", "tailwind", "blade", "alpine"],
 	"license": "GPL-3.0+",
 	"name": "sirvelia-labs/hikeflow-ui",
