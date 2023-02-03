@@ -13,7 +13,7 @@ class HikeFlowLoader
 	{
 		$this->blade = new Blade(HIKEFLOWUI_PATH . 'resources/views', HIKEFLOWUI_PATH . 'resources/cache');
 
-
+		$this->load_components();
 	}
 
 	// Clone not allowed
@@ -29,7 +29,7 @@ class HikeFlowLoader
 		return self::$instance;
 	}
 
-	private function loadComponents()
+	private function load_components()
 	{
 		$this->blade->compiler()->components([
 			'alert'                     => 'test-alert',
