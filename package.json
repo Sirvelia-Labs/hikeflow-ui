@@ -4,7 +4,7 @@
   "description": "A still-in-development JS package to build custom reactive DOM components with Alpine.js",
   "main": "index.js",
   "scripts": {
-    "init": "node ./cli/init.js",
+    "init": "node .node_modules/hikeflow/cli/init.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": {

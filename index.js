@@ -1,4 +1,4 @@
-const HikeConfig = require('./hikeflow.config.js')
+const HikeConfig = require('../../hikeflow.config.js')
 
 module.exports = class HikeFlowComponent {
     constructor(componentProperties) {
