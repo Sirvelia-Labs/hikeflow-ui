@@ -2,7 +2,7 @@ const fs = require('fs-extra')
 
 const FILE_PATH = './hikeflow.config.js'
 
-function initialize_package() {
+module.exports = initialize_package = () => {
     const hikeflow_theme_config = {
         example_component: {
             customizable_example: 'example_class'
@@ -15,5 +15,3 @@ function initialize_package() {
 
     console.log("Package initialized successfully.")
 }
-
-initialize_package()
