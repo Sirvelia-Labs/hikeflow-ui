@@ -1,6 +1,6 @@
-const HikeConfig = require('../../hikeflow.config.js')
+import { HikeConfig } from '../../hikeflow.config.js';
 
-module.exports = class HikeFlowComponent {
+class HikeFlowComponent {
     constructor(componentProperties) {
 
         const elementName       = componentProperties.name              ?? 'default';
@@ -97,3 +97,5 @@ module.exports = class HikeFlowComponent {
     }
 
 }
+
+export default HikeFlowComponent

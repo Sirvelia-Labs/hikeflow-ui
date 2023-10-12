@@ -9,9 +9,9 @@ module.exports = initialize_package = () => {
         }
     }
 
-    const file_content = `module.exports = ${JSON.stringify(hikeflow_theme_config, null, 4)}`
+    const file_content = `export const HikeConfig = ${JSON.stringify(hikeflow_theme_config, null, 4)}`
 
     fs.writeFileSync(FILE_PATH, file_content, 'utf-8')
 
-    console.log("Package initialized successfully.")
+    console.log("HikeFlow initialized successfully.")
 }
