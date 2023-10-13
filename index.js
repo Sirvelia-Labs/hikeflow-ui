@@ -56,7 +56,7 @@ class HikeFlowComponent {
                         if (attrName.includes(componentName + '-')) finalAttributes[attrName.replace(componentName + '-', '')] = attrVal;
                         else if (attrName.includes(componentName + ':')) {
                             if (!('x-data' in finalAttributes)) finalAttributes['x-data'] = {};
-                            if (isJSON(finalAttributes['x-data'])) finalAttributes['x-data'][attrName.replace(componentName + ':', '')] = `%%${attrVal}%%`;
+                            if (isJSON(finalAttributes['x-data'])) finalAttributes['x-data'][attrName.replace(componentName + ':', '')] = `%%()=>${attrVal}%%`;
                         }
                     });
                     let parsedAlpine = [];

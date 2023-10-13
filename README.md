@@ -1,0 +1,16 @@
+    - name: component name
+    - attributes: component attributes (with a default value set)
+    - clonedAttributes: create an attribute with a different names referencing to a value from another attribute (extremely handy with custom logic)
+    - customizables: customizable class components from the config file
+        - fixedClasses: fixed classes can be defined to avoid an alteration of the main component's functionality
+        - classAttributes: attributes that will be added to the component's class
+        - configuration theme classes
+    - logic: set custom logic to the introduced attribute values (attribute_value, attribute_values) => callback_to_custom_function(attribute_value, attribute_values)
+    - alpineComponents: define alpine directives for each component
+        - alpine directives of a component can be easily defined (<h-component COMPONENT_NAME-ALPINE_DIRECTIVE="..."></h-component>)
+        - alpine data from a component can be easily modified (<h-component COMPONENT_NAME:DATA_VARIABLE="..."></h-component>)
+    - html: describe the component's HTML format with HikeFlow's multiple variables
+        - attr{ATTRIBUTE_NAME}: value of attribute ATTRIBUTE_NAME after applying its defined logic
+        - ctm{CUSTOMIZABLE_NAME}: defines the customizable classes for the corresponding component
+        - alpine{ALPINE_COMPONENT_NAME}: defines the alpine directives for the corresponding component
+        - {slot}: includes the innerHTML defined inside the component
