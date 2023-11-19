@@ -184,9 +184,9 @@ In HikeFlow, the reactive parts of your component are defined separately, assign
             }
         })
 
-Just like attributes, the different properties in the reactive parts of a HikeFlow component can be redefined from within the HTML. The data values can be accessed using the `:` operator after the reactive part's name, and the other directives by using the `-` operator.
+Just like attributes, the different properties in the reactive parts of a HikeFlow component can be redefined from within the HTML. The data values can be accessed using the `:` operator after the reactive part's name, and the other directives by using the `.` operator.
 
-        <h-example modal:open="true" modal-@click="() => { console.log('closed modal'); }" />
+        <h-example modal:open="true" modal.@click="() => { console.log('closed modal'); }" />
 
 To ensure a correct reactivity, you can replace a reactive part's data with an AlpineJS data variable defined in an outer scope, and it will change dynamically, following the outer variable changes.
 
