@@ -21,6 +21,7 @@ class HikeFlowComponent {
                 let parsedHTML = html;
                 let mappedAttributes = {};
 
+                // TODO: LET THE USER SPECIFY A LIST OF LOGIC FUNCTIONS, AND REFER THEM WITH AN INDEX. AND AUTOMATICALLY CREATE ANONYMOUS CLONED ATTRIBUTES
                 // MERGE ATTRIBUTES & CLONED ATTRIBUTES
                 Object.entries(attributes).forEach(([attrName, defaultValue]) => {
                     mappedAttributes[attrName] = this.getAttribute(attrName) || defaultValue;
@@ -35,9 +36,6 @@ class HikeFlowComponent {
                     if (attrName in logic) final_value = logic[attrName](value, mappedAttributes);
                     parsedHTML = parsedHTML.replaceAll('attr{' + attrName + '}', final_value);
                 });
-
-                // PARSE INNERHTML
-                parsedHTML = parsedHTML.replaceAll('{slot}', this.innerHTML);
 
                 // PARSE CUSTOMIZABLES
                 Object.entries(customizables).forEach(([varName, options]) => {
@@ -58,6 +56,7 @@ class HikeFlowComponent {
                     return directive;
                 }
                 const isJSON = (object) => typeof object === 'object';
+                const isFunction = (object) => typeof object === 'function';
                 let definedAttributes = {};
                 for (let i = 0; i < this.attributes.length; i++) definedAttributes[this.attributes[i].nodeName] = this.attributes[i].nodeValue;
                 Object.entries(alpineComponents).forEach(([componentName, alpineAttributes]) => {
@@ -73,10 +72,14 @@ class HikeFlowComponent {
                     Object.entries(finalAttributes).forEach(([attrName, attrVal]) => {
                         let final_value = attrVal;
                         if (isJSON(final_value)) final_value = JSON.stringify(final_value).replaceAll('"', "'").replaceAll("'%%", '').replaceAll("%%'", '');
+                        else if (isFunction(final_value)) final_value = String(final_value);
                         parsedAlpine.push(`${ parseDirective(attrName) }="${ final_value }"`);
                     });
                     parsedHTML = parsedHTML.replaceAll('alpine{' + componentName + '}', parsedAlpine.join(' '));
                 });
+
+                // PARSE INNERHTML
+                parsedHTML = parsedHTML.replaceAll('{slot}', this.innerHTML);
 
                 this.outerHTML = parsedHTML
             }

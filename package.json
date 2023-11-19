@@ -1,6 +1,6 @@
 {
   "name": "hikeflow",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "A still-in-development JS package to build custom reactive DOM components with Alpine.js",
   "main": "index.js",
   "type": "module",
