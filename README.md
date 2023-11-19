@@ -44,7 +44,7 @@ The new Alpine-based reactive component library!
 6. Call the new component in your HTML:
    
         ...
-        <h-hello-world />
+        <h-hello-world></h-hello-world>
         ...
 
 # HikeFlow Properties
@@ -62,7 +62,7 @@ Defines the name of the component, which can be called from the HTML.
 
 When called, all HikeFlow components have a 'h-' prefix to avoid compatibility issues with other component libraries.
 
-        <h-example ... />
+        <h-example ...></h-example>
 
 ## attributes
 
@@ -77,7 +77,7 @@ In **attributes**, you can specify different attributes for your component. To d
 
 It can be directly accessed from the HTML:
 
-        <h-example test="true" />
+        <h-example test="true"></h-example>
 
 ## clonedAttributes
 
@@ -186,7 +186,7 @@ In HikeFlow, the reactive parts of your component are defined separately, assign
 
 Just like attributes, the different properties in the reactive parts of a HikeFlow component can be redefined from within the HTML. The data values can be accessed using the `:` operator after the reactive part's name, and the other directives by using the `.` operator.
 
-        <h-example modal:open="true" modal.@click="() => { console.log('closed modal'); }" />
+        <h-example modal:open="true" modal.@click="() => { console.log('closed modal'); }"></h-example>
 
 To ensure a correct reactivity, you can replace a reactive part's data with an AlpineJS data variable defined in an outer scope, and it will change dynamically, following the outer variable changes.
 
@@ -194,7 +194,7 @@ To ensure a correct reactivity, you can replace a reactive part's data with an A
             <button @click="outer_modal_open = !outer_modal_open">
                 Toggle modal
             </button>
-            <h-example modal:open="outer_modal_open" />
+            <h-example modal:open="outer_modal_open"></h-example>
         </div>
 
 ## html (required)
