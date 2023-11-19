@@ -29,6 +29,16 @@ class HikeFlowComponent {
                     mappedAttributes[attrName] = this.getAttribute(refName) || attributes[refName];
                 });
 
+                // PARSE ATTRIBUTES
+                Object.entries(mappedAttributes).forEach(([attrName, value]) => {
+                    let final_value = value;
+                    if (attrName in logic) final_value = logic[attrName](value, mappedAttributes);
+                    parsedHTML = parsedHTML.replaceAll('attr{' + attrName + '}', final_value);
+                });
+
+                // PARSE INNERHTML
+                parsedHTML = parsedHTML.replaceAll('{slot}', this.innerHTML);
+
                 // PARSE CUSTOMIZABLES
                 Object.entries(customizables).forEach(([varName, options]) => {
                     let configClasses = ((elementName in HikeConfig) && (varName in HikeConfig[elementName])) ? (' ' + HikeConfig[elementName][varName]) : "";
@@ -68,15 +78,7 @@ class HikeFlowComponent {
                     parsedHTML = parsedHTML.replaceAll('alpine{' + componentName + '}', parsedAlpine.join(' '));
                 });
 
-                // PARSE ATTRIBUTES
-                Object.entries(mappedAttributes).forEach(([attrName, value]) => {
-                    let final_value = value;
-                    if (attrName in logic) final_value = logic[attrName](value, mappedAttributes);
-                    parsedHTML = parsedHTML.replaceAll('attr{' + attrName + '}', final_value);
-                });
-
-                // PARSE INNERHTML
-                this.outerHTML = parsedHTML.replaceAll('{slot}', this.innerHTML);
+                this.outerHTML = parsedHTML
             }
 
             connectedCallback() {
