@@ -56,7 +56,6 @@ class HikeFlowComponent {
                     return directive;
                 }
                 const isJSON = (object) => typeof object === 'object';
-                const isFunction = (object) => typeof object === 'function';
                 let definedAttributes = {};
                 for (let i = 0; i < this.attributes.length; i++) definedAttributes[this.attributes[i].nodeName] = this.attributes[i].nodeValue;
                 Object.entries(alpineComponents).forEach(([componentName, alpineAttributes]) => {
@@ -71,8 +70,12 @@ class HikeFlowComponent {
                     let parsedAlpine = [];
                     Object.entries(finalAttributes).forEach(([attrName, attrVal]) => {
                         let final_value = attrVal;
-                        if (isJSON(final_value)) final_value = JSON.stringify(final_value).replaceAll('"', "'").replaceAll("'%%", '').replaceAll("%%'", '');
-                        else if (isFunction(final_value)) final_value = String(final_value);
+                        if (isJSON(final_value)) final_value = JSON.stringify(final_value, (_, value) => {
+                            if (typeof value === 'function') {
+                                return value.toString();
+                            }
+                            return value;
+                        }).replaceAll('"', "'").replaceAll("'%%", '').replaceAll("%%'", '');
                         parsedAlpine.push(`${ parseDirective(attrName) }="${ final_value }"`);
                     });
                     parsedHTML = parsedHTML.replaceAll('alpine{' + componentName + '}', parsedAlpine.join(' '));
