@@ -2,6 +2,13 @@
   "name": "hikeflow",
   "version": "1.0.17",
   "description": "A still-in-development JS package to build custom reactive DOM components with Alpine.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sirvelia-Labs/hikeflow-ui"
+  },
+  "keywords": [
+    "AlpineJS", "Custom Components"
+  ],
   "main": "index.js",
   "type": "module",
   "files": [
