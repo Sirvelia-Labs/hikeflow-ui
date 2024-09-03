@@ -288,6 +288,55 @@ The **html** property defines how a component is rendered. It consists of a stri
             Hello World!
         </div>
 
+- **{slot:slot_name}**: If you need to separate the innerHTML of a component, you can declare the name of a slot. When rendered, this space will be replaced by the inner HTML of the component which contains an attribute `slot="slot_name"`.
+
+        new HikeFlowComponent({
+            name: 'example',
+            //...
+            html: `
+                <div>
+                    <table>
+                        <thead>
+                            <tr>{slot:header}</tr>
+                        </thead>
+                        <tbody>
+                            {slot:content}
+                        </tbody>
+                    </table>
+                </div>
+            `
+        })
+
+    When called in the HTML:
+
+        <h-example>
+            <div slot="header">
+                <td>Example Header</td>
+            </div>
+            <div slot="content">
+                <tr>
+                    <td>Example Content</td>
+                </tr>
+            </div>
+        </h-example>
+
+    This will be rendered:
+
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Example Header</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Example Content</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
 # Render flow
 
 The render flow of the multiple properties of a HikeFlow component follows a strategic order to make possible a set of different handy use cases. HikeFlow's directives are rendered in the following order:
@@ -295,7 +344,7 @@ The render flow of the multiple properties of a HikeFlow component follows a str
 1. In first place, the component's attributes are obtained, assigning their default value to those which have not been assigned by the user.
 2. In second place, the component's attributes are rendered. If any attribute has a logic function, it is called just before its rendering, placing the function's output in the HTML.
 3. Next, the customizables are rendered following the rendering flow specified in the **customizables** section.
-4. After the customizables, the AlpineJS reactive parts are rendered.
+4. After the customizables, the AlpineJS reactive parts are rendered. If any attribute is included inside an alpineComponent, it is replaced for its final value.
 5. Finally, the **{slot}** directive is replaced by the component's inner HTML.
 
 This render flow makes possible, for example, creating customizables, AlpineJS reactive parts and placing the **{slot}** directive inside an attribute's logic function. Example:

@@ -28,19 +28,29 @@ class HikeFlowComponent {
 
         window.customElements.define('h-' + elementName.toLowerCase(), class extends HTMLElement {
             private rendered: boolean = false;
+            slotContents: Map<any, any>;
 
             constructor() {
                 super();
+                this.slotContents = new Map();
             }
 
             render(): void {
                 if (!this.parentNode) return;
 
+                // STORE SLOT CONTENTS IF NOT ALREADY STORED
+                if (this.slotContents.size === 0) {
+                    const slotElements = this.querySelectorAll('[slot]');
+                    slotElements.forEach(el => {
+                        this.slotContents.set(el.getAttribute('slot'), el.innerHTML);
+                    });
+                }
+
                 // PARSE HTML
                 let parsedHTML = html;
-                let mappedAttributes: Record<string, any> = {};
-
+                
                 // MERGE ATTRIBUTES & CLONED ATTRIBUTES
+                let mappedAttributes: Record<string, any> = {};
                 Object.entries(attributes).forEach(([attrName, defaultValue]) => {
                     mappedAttributes[attrName] = this.getAttribute(attrName) || defaultValue;
                 });
@@ -49,11 +59,14 @@ class HikeFlowComponent {
                 });
 
                 // PARSE ATTRIBUTES
-                Object.entries(mappedAttributes).forEach(([attrName, value]) => {
-                    let final_value: any = value;
-                    if (attrName in logic) final_value = logic[attrName](value, mappedAttributes);
-                    parsedHTML = parsedHTML.replaceAll('attr{' + attrName + '}', final_value);
-                });
+                const parseAttributes = (text) => {
+                    return text.replace(/attr{(\w+)}/g, (match, attrName) => {
+                        let final_value = mappedAttributes[attrName];
+                        if (attrName in logic) final_value = logic[attrName](final_value, mappedAttributes);
+                        return final_value;
+                    });
+                };
+                parsedHTML = parseAttributes(parsedHTML);
 
                 // PARSE CUSTOMIZABLES
                 Object.entries(customizables).forEach(([varName, options]) => {
@@ -101,13 +114,20 @@ class HikeFlowComponent {
                             return value;
                         }).replaceAll('"', "'").replaceAll("'%%", '').replaceAll("%%'", '');
 
-                        parsedAlpine.push(`${parseDirective(attrName)}="${final_value}"`);
+                        parsedAlpine.push(parseAttributes(`${parseDirective(attrName)}="${final_value}"`));
                     });
 
                     parsedHTML = parsedHTML.replaceAll('alpine{' + componentName + '}', parsedAlpine.join(' '));
                 });
 
-                // PARSE INNERHTML
+                // PARSE INNER HTML SLOTS
+                const slotRegex = /{slot:(\w+)}/g;
+                let match;
+                while ((match = slotRegex.exec(parsedHTML)) !== null) {
+                    const slotName = match[1]
+                    const slotContent = this.slotContents.get(slotName) || '';
+                    parsedHTML = parsedHTML.replace(match[0], slotContent)
+                }
                 parsedHTML = parsedHTML.replaceAll('{slot}', this.innerHTML);
 
                 // Update component inner content without replacing it
