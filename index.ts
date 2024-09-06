@@ -44,6 +44,7 @@ class HikeFlowComponent {
                     slotElements.forEach(el => {
                         this.slotContents.set(el.getAttribute('slot'), el.innerHTML);
                     });
+                    this.slotContents.set('', this.innerHTML)
                 }
 
                 // PARSE HTML
@@ -128,7 +129,7 @@ class HikeFlowComponent {
                     const slotContent = this.slotContents.get(slotName) || '';
                     parsedHTML = parsedHTML.replace(match[0], slotContent)
                 }
-                parsedHTML = parsedHTML.replaceAll('{slot}', this.innerHTML);
+                parsedHTML = parsedHTML.replaceAll('{slot}', this.slotContents.get(''));
 
                 // Update component inner content without replacing it
                 this.innerHTML = parsedHTML;
