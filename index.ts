@@ -133,6 +133,16 @@ class HikeFlowComponent {
 
                 // Update component inner content without replacing it
                 this.innerHTML = parsedHTML;
+
+                this.initializeAlpineComponent();
+            }
+
+            initializeAlpineComponent() {
+                if (window.Alpine) {
+                    window.Alpine.nextTick(() => {
+                        window.Alpine.initTree(this);
+                    })
+                }
             }
 
             connectedCallback(): void {

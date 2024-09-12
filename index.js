@@ -107,6 +107,16 @@ class HikeFlowComponent {
                 parsedHTML = parsedHTML.replaceAll('{slot}', this.slotContents.get(''));
 
                 this.innerHTML = parsedHTML
+
+                this.initializeAlpineComponent();
+            }
+
+            initializeAlpineComponent() {
+                if (window.Alpine) {
+                    window.Alpine.nextTick(() => {
+                        window.Alpine.initTree(this);
+                    })
+                }
             }
 
             connectedCallback() {
